@@ -26,8 +26,18 @@ if(!BookByID) return res.status(404).send('The book with the given id not found'
 res.send(BookByID);
 }
 
+const addBook = (req,res)=>{
+  const book ={
+    bookId: booksDB.length+1,
+    bookName: req.body.bookName,
+    bookISBN :req.body.bookISBN,
+  };
+  booksDB.push(book);
+  res.send(book);
+};
 
 module.exports={
   getAllBooks,
-  getBookByID
+  getBookByID,
+  addBook
 };
