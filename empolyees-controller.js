@@ -28,8 +28,25 @@ const updateEmployeeName = (req, res) => {
   }
 };
 
+//delete employee by id 
+const deleteEmplyee=(req,res)=>{
+  const id =parseInt(req.params.id);
+  const employee = employeesDB.find(
+    e => e.employeeId === id
+  );
+  if(!employee){
+    return res.send('Error not found');
+  }
+  const index =employeesDB.indexOf(employee);
+  employeesDB.splice(index,1);
+
+  res.send(employee);
+}
+
+
 
 module.exports = {
   updateEmployeeName,
+  deleteEmplyee,
 };
 
