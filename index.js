@@ -15,6 +15,7 @@ app.post('/books',BooksList.addBook);
 //Employee end points
 app.put('/employees/:id',EmployeesList.updateEmployeeName);
 app.delete('/employees/:id',EmployeesList.deleteEmplyee);
+app.delete('/employees',EmployeesList.deleteAllEmplyee);
 
 // PORT
 app.listen(8080, ()=> console.log("Server is running on http://localhost:8080"))

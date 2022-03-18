@@ -43,10 +43,23 @@ const deleteEmplyee=(req,res)=>{
   res.send(employee);
 }
 
+//delete All employee  
+const deleteAllEmplyee=(req,res)=>{
+
+  if(employeesDB.length === 0){
+    return res.send('Error not found');
+  }
+
+  const temp =employeesDB;
+  employeesDB =[];
+
+  res.send(temp);
+}
 
 
 module.exports = {
   updateEmployeeName,
   deleteEmplyee,
+  deleteAllEmplyee,
 };
 
