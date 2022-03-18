@@ -1,5 +1,6 @@
 # Simple API for managing library system
 Simple REST API for library management system
+## Install dependencies by running `npm install`
 ___
 
 ## Organization
