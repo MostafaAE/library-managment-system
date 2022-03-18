@@ -1,5 +1,6 @@
 const express =  require('express')
 const BooksList = require('./books-controller')
+const EmployeesList =require('./empolyees-controller');
 
 const app = express()
 app.use(express.json())
@@ -10,6 +11,9 @@ app.get('/books',BooksList.getAllBooks);
 app.get('/books/:bookId',BooksList.getBookByID);
 app.post('/books',BooksList.addBook); 
 
+
+//Employee end points
+app.put('/employees/:id',EmployeesList.updateEmployeeName);
 
 // PORT
 app.listen(8080, ()=> console.log("Server is running on http://localhost:8080"))
