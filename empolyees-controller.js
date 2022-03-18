@@ -19,8 +19,20 @@ const getEmployeeByID =(req,res)=>{
 	  res.send(employee);
 }
 
+// add new employee
+const addEmployee = (req,res)=>{
+	const employee ={
+	  employeeId: employeesDB.length+1,
+	  employeeName: req.body.name,
+	  employeeSSN :req.body.ssn,
+	  employeeDOB: req.body.dob,
+	};
+	employeesDB.push(employee);
+	res.send(employee);
+};
+
 module.exports={
   getAllemployees,
   getEmployeeByID,
-
+  addEmployee,
 };

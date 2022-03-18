@@ -12,6 +12,7 @@ app.post('/books',BooksList.addBook);
 
 app.get('/employees',EmployeesList.getAllemployees);
 app.get('/employees/:id',EmployeesList.getEmployeeByID);
+app.post('/employees',EmployeesList.addEmployee);
 
 
 // PORT
