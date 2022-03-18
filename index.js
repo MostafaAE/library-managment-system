@@ -10,7 +10,7 @@ app.get('/books',BooksList.getAllBooks);
 app.get('/books/:bookId',BooksList.getBookByID);
 app.post('/books',BooksList.addBook); 
 app.put('/books/:bookId',BooksList.updateBook);
-
+app.delete('/books/:bookId',BooksList.deleteBook);
 
 // PORT
 app.listen(8080, ()=> console.log("Server is running on http://localhost:8080"))
