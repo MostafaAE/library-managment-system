@@ -6,3 +6,13 @@ let employeesDB = [
       employeeDOB: "25-12-1998",
     },
   ];
+
+// get all employees
+const getAllemployees=(req,res)=>{
+  res.send(employeesDB);
+};
+  
+
+module.exports={
+  getAllemployees,
+};
