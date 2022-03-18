@@ -15,6 +15,6 @@ app.post('/books',BooksList.addBook);
 
 // members End Points
 app.post("/members", memberslist.addMember);
-
+app.put("/members/:memberId", memberslist.updateMember);
 // PORT
 app.listen(8080, ()=> console.log("Server is running on http://localhost:8080"))
