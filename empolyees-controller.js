@@ -12,7 +12,15 @@ const getAllemployees=(req,res)=>{
   res.send(employeesDB);
 };
   
+// get employee by id 
+const getEmployeeByID =(req,res)=>{
+	  let employee =employeesDB.find((employee)=>employee.employeeId===parseInt(req.params.id));
+	  if(!employee) return res.status(404).send('Employee id is not found');
+	  res.send(employee);
+}
 
 module.exports={
   getAllemployees,
+  getEmployeeByID,
+
 };

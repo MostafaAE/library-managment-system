@@ -11,6 +11,8 @@ app.get('/books/:bookId',BooksList.getBookByID);
 app.post('/books',BooksList.addBook); 
 
 app.get('/employees',EmployeesList.getAllemployees);
+app.get('/employees/:id',EmployeesList.getEmployeeByID);
+
 
 // PORT
 app.listen(8080, ()=> console.log("Server is running on http://localhost:8080"))
