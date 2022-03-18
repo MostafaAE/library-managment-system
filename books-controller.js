@@ -26,6 +26,7 @@ if(!BookByID) return res.status(404).send('The book with the given id not found'
 res.send(BookByID);
 }
 
+
 const addBook = (req,res)=>{
   const book ={
     bookId: booksDB.length+1,
@@ -36,8 +37,21 @@ const addBook = (req,res)=>{
   res.send(book);
 };
 
+
+const updateBook = (req,res)=>{
+
+  let BookByID =booksDB.find((book)=>book.bookId===parseInt(req.params.bookId));
+  if(!BookByID) return res.status(404).send('The book with the given id not found');
+  BookByID.bookName=req.body.bookName;
+  BookByID.bookISBN=req.body.bookISBN;
+  res.send(BookByID);
+
+};
+
+
 module.exports={
   getAllBooks,
   getBookByID,
-  addBook
+  addBook,
+  updateBook
 };

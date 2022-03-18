@@ -9,6 +9,7 @@ app.use(express.json())
 app.get('/books',BooksList.getAllBooks);
 app.get('/books/:bookId',BooksList.getBookByID);
 app.post('/books',BooksList.addBook); 
+app.put('/books/:bookId',BooksList.updateBook);
 
 
 // PORT
