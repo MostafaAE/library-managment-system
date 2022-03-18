@@ -21,7 +21,19 @@ let membesrDB = [
    res.send(member);
  };
 
- module.exports = {
-  getAllMembers,
-  getMemberbyId,
-};
+
+ // delete member using id 
+  const deleteMember = (req, res) => {
+    let member = memberDB.find(mem => mem.memberId === parseInt(req.params.memberId));
+    if (!member) return res.status(404).send("the member with the given id not found");
+
+    const index = memberDB.indexOf(member);
+    memberDB.splice(index,1); 
+    res.send(member);
+  };
+
+  module.exports = {
+    getAllMembers,
+    getMemberbyId,
+    deleteMember,
+  };

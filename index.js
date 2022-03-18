@@ -15,6 +15,8 @@ app.post('/books',BooksList.addBook);
 // members End Points
 app.get("/members", memberslist.getAllMembers);
 app.get("/members/:memberId", memberslist.getMemberbyId);
+app.delete("/members/:memberId", memberslist.deleteMember);
+
 
 // PORT
 app.listen(8080, ()=> console.log("Server is running on http://localhost:8080"))
