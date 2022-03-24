@@ -14,15 +14,16 @@ let booksDB = [
 
 //get all books given route to books
 const getAllBooks=(req,res)=>{
-res.send(booksDB);
+  res.status(200).send(booksDB);
 };
 
 //get book give id in param bookId
 const getBookByID =(req,res)=>
 {
-let BookByID =booksDB.find((book)=>book.bookId===parseInt(req.params.bookId))
-if(!BookByID) return res.status(404).send('The book with the given id not found');
-res.send(BookByID);
+  let requestedBookId = parseInt(req.params.bookId)
+  let bookByID = booksDB.find((book) => book.bookId === requestedBookId)
+  if(!bookByID) return res.status(404).send('The book with the given id not found');
+  res.status(200).send(bookByID);
 }
 
 // add book to books list
@@ -33,27 +34,29 @@ const addBook = (req,res)=>{
     bookISBN :req.body.bookISBN,
   };
   booksDB.push(book);
-  res.send(book);
+  res.status(200).send(book);
 };
 
 // update book by id
 const updateBook = (req,res)=>{
 
-  let BookByID =booksDB.find((book)=>book.bookId===parseInt(req.params.bookId));
-  if(!BookByID) return res.status(404).send('The book with the given id not found');
-  BookByID.bookName=req.body.bookName;
-  BookByID.bookISBN=req.body.bookISBN;
-  res.send(BookByID);
+  let requestedBookId = parseInt(req.params.bookId)
+  let bookByID = booksDB.find((book) => book.bookId === requestedBookId)
+  if(!bookByID) return res.status(404).send('The book with the given id not found');
+  bookByID.bookName=req.body.bookName;
+  bookByID.bookISBN=req.body.bookISBN;
+  res.status(200).send(bookByID)
 
 };
 
 // delete book by id
 const deleteBook = (req,res)=>{
-  let BookByID =booksDB.find((book)=>book.bookId===parseInt(req.params.bookId));
-  if(!BookByID) return res.status(404).send('The book with the given id not found');
-  const index = booksDB.indexOf(BookByID);
+  let requestedBookId = parseInt(req.params.bookId)
+  let bookByID = booksDB.find((book) => book.bookId === requestedBookId)
+  if(!bookByID) return res.status(404).send('The book with the given id not found');
+  const index = booksDB.indexOf(bookByID);
   booksDB.splice(index,1);
-  res.send(BookByID);
+  res.status(200).send(bookByID);
 };
 
 
