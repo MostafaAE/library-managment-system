@@ -9,10 +9,15 @@ app.use(express.json())
 app.get('/books',BooksList.getAllBooks);
 app.get('/books/:bookId',BooksList.getBookByID);
 app.post('/books',BooksList.addBook); 
+app.put('/books/:bookId',BooksList.updateBook);
+app.delete('/books/:bookId',BooksList.deleteBook);
 
 app.get('/employees',EmployeesList.getAllemployees);
 app.get('/employees/:id',EmployeesList.getEmployeeByID);
 app.post('/employees',EmployeesList.addEmployee);
+
+
+
 
 
 // PORT
