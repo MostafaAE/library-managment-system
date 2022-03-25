@@ -7,8 +7,21 @@ let membesrDB = [
     },
   ];
 
+ 
+  // get all members
+  const getAllMembers = (req, res) => {
+    res.send(memberDB);
+ };
 
-  // add member to members list
+
+ // get member by using id 
+ const getMemberbyId = (req, res) => {
+   let member = memberDB.find(mem => mem.memberId === parseInt(req.params.memberId));
+   if (!member) return res.status(404).send("the member with the given id not found");
+   res.send(member);
+ };
+
+   // add member to members list
   const addMember = (req,res)=>{
    const member ={
     memberId: memberDB.length+1,
@@ -22,22 +35,34 @@ let membesrDB = [
 
 
 
-// update member by id
-const updateMember = (req,res)=>{
+  // update member by id
+  const updateMember = (req,res)=>{
 
-  let member =memberDB.find(mem => mem.memberId === parseInt(req.params.memberId));
-  if(!member) return res.status(404).send('The member with the given id not found');
-  member.memberName =req.body.memberName;
-  member.memberPhone=req.body.memberPhone;
-  member.employeeAge=req.body.employeeAge;
-  res.send(member);
+    let member =memberDB.find(mem => mem.memberId === parseInt(req.params.memberId));
+    if(!member) return res.status(404).send('The member with the given id not found');
+    member.memberName =req.body.memberName;
+    member.memberPhone=req.body.memberPhone;
+    member.employeeAge=req.body.employeeAge;
+    res.send(member);
 
-};
+  };
 
 
-module.exports={
+ // delete member using id 
+  const deleteMember = (req, res) => {
+    let member = memberDB.find(mem => mem.memberId === parseInt(req.params.memberId));
+    if (!member) return res.status(404).send("the member with the given id not found");
 
-  addMember,
-  updateMember
-  
-};
+    const index = memberDB.indexOf(member);
+    memberDB.splice(index,1); 
+    res.send(member);
+  };
+
+
+  module.exports = {
+    getAllMembers,
+    getMemberbyId,
+    addMember,
+    updateMember
+    deleteMember,
+  };
