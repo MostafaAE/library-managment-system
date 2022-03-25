@@ -1,9 +1,7 @@
 const express =  require('express')
 const BooksList = require('./books-controller')
-const EmployeesList=require('./empolyees-controller');
+const EmployeesList =require('./empolyees-controller');
 const memberslist = require("./members-controller");
-
-
 
 const app = express()
 app.use(express.json())
@@ -17,6 +15,10 @@ app.put('/books/:bookId',BooksList.updateBook);
 app.delete('/books/:bookId',BooksList.deleteBook);
 
 
+//Employee end points
+app.put('/employees/:id',EmployeesList.updateEmployeeName);
+app.delete('/employees/:id',EmployeesList.deleteEmplyee);
+app.delete('/employees',EmployeesList.deleteAllEmplyee);
 app.get('/employees',EmployeesList.getAllemployees);
 app.get('/employees/:id',EmployeesList.getEmployeeByID);
 app.post('/employees',EmployeesList.addEmployee);
