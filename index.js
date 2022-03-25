@@ -19,6 +19,10 @@ app.delete('/books/:bookId',BooksList.deleteBook);
 app.put('/employees/:id',EmployeesList.updateEmployeeName);
 app.delete('/employees/:id',EmployeesList.deleteEmplyee);
 app.delete('/employees',EmployeesList.deleteAllEmplyee);
+app.get('/employees',EmployeesList.getAllemployees);
+app.get('/employees/:id',EmployeesList.getEmployeeByID);
+app.post('/employees',EmployeesList.addEmployee);
+
 
 // members End Points
 app.post("/members", memberslist.addMember);
