@@ -1,3 +1,5 @@
+const {Member} = require ('../models/Member');
+
 let memberDB = [
     {
       memberId: 1,
@@ -8,61 +10,22 @@ let memberDB = [
   ];
 
  
-  // get all members
-  const getAllMembers = (req, res) => {
-    res.send(memberDB);
- };
 
+// add new member to database 
+const createMember = async (req, res) =>{
+  try{
+      const member = new Member(req.body)
+      await member.save()
+      res.status(200).send(member)
+  }
+  catch(e){
+     res.status(400).send(e)
+  }
+}
 
- // get member by using id 
- const getMemberbyId = (req, res) => {
-   let member = memberDB.find(mem => mem.memberId === parseInt(req.params.memberId));
-   if (!member) return res.status(404).send("the member with the given id not found");
-   res.send(member);
- };
-
-   // add member to members list
-  const addMember = (req,res)=>{
-   const member ={
-    memberId: memberDB.length+1,
-    memberName:req.body.memberName,
-    memberPhone:req.body.memberPhone,
-    employeeAge:req.body.employeeAge,
-  };
-  memberDB.push(member);
-  res.send(member);
-};
-
-
-
-  // update member by id
-  const updateMember = (req,res)=>{
-
-    let member =memberDB.find(mem => mem.memberId === parseInt(req.params.memberId));
-    if(!member) return res.status(404).send('The member with the given id not found');
-    member.memberName =req.body.memberName;
-    member.memberPhone=req.body.memberPhone;
-    member.employeeAge=req.body.employeeAge;
-    res.send(member);
-
-  };
-
-
- // delete member using id 
-  const deleteMember = (req, res) => {
-    let member = memberDB.find(mem => mem.memberId === parseInt(req.params.memberId));
-    if (!member) return res.status(404).send("the member with the given id not found");
-
-    const index = memberDB.indexOf(member);
-    memberDB.splice(index,1); 
-    res.send(member);
-  };
 
 
   module.exports = {
-    getAllMembers,
-    getMemberbyId,
-    addMember,
-    updateMember,
-    deleteMember
+
+    createMember
   };
