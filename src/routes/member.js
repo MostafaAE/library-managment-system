@@ -4,6 +4,7 @@ const memberRouter = Router()
 
 
 // members end points
+memberRouter.delete("/:memberId", Member.deleteMember);
 memberRouter.put("/:memberId", Member.updateMember);
 
 

@@ -8,7 +8,7 @@ let memberDB = [
       employeeAge: "23",
     },
   ];
- 
+  
   //memebr put by id 
   const updateMember = async (req,res) =>{
     try{
@@ -46,7 +46,20 @@ let memberDB = [
   
   }
   
+  // delete book by id
+  const deleteMember = async (req,res) =>{
+  
+    try{
+        const memberId =  req.params.memberId
+        const member = await Member.deleteOne({_id : memberId})
+        res.status(200).send(member)
+    }
+    catch(e){
+        res.status(400).send(e)
+     }
+  }
 
   module.exports = {
-    updateMember
+    updateMember,
+    deleteMember
   };
