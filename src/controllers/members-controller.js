@@ -24,8 +24,21 @@ const createMember = async (req, res) =>{
 }
 
 
+//get all members
+const getAllMembers = async (req, res) =>{
+  try{   
+      const members = await Member.find({})
+      res.status(200).send(members)    
+  }
+  catch(e){
+     res.status(400).send(e)
+  }
+}
+
 
   module.exports = {
 
-    createMember
+    createMember,
+    getAllMembers
+    
   };
