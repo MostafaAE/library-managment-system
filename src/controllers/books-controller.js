@@ -26,10 +26,16 @@ const createBook = async (req, res) =>{
   }
 }
 
-//get all books given route to books
-const getAllBooks=(req,res)=>{
-  res.status(200).send(booksDB);
-};
+//get all books
+const getAllBooks = async (req, res) =>{
+  try{
+      const books = await Book.find({})
+      res.status(200).send(books)
+  }
+  catch(e){
+     res.status(400).send(e)
+  }
+}
 
 //get book give id in param bookId
 const getBookByID =(req,res)=>
