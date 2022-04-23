@@ -1,4 +1,4 @@
-let membesrDB = [
+let memberDB = [
     {
       memberId: 1,
       memberName: "Mostafa",
@@ -63,6 +63,6 @@ let membesrDB = [
     getAllMembers,
     getMemberbyId,
     addMember,
-    updateMember
-    deleteMember,
+    updateMember,
+    deleteMember
   };
