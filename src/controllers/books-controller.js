@@ -1,3 +1,5 @@
+const {Book} = require ('../models/Book');
+
 let booksDB = [
   {
     bookId:1,
@@ -11,6 +13,18 @@ let booksDB = [
   },
 ];
 
+
+// add new book to database 
+const createBook = async (req, res) =>{
+  try{
+      const book = new Book(req.body)
+      await book.save()
+      res.status(200).send(book)
+  }
+  catch(e){
+     res.status(400).send(e)
+  }
+}
 
 //get all books given route to books
 const getAllBooks=(req,res)=>{
@@ -26,16 +40,6 @@ const getBookByID =(req,res)=>
   res.status(200).send(bookByID);
 }
 
-// add book to books list
-const addBook = (req,res)=>{
-  const book ={
-    bookId: booksDB.length+1,
-    bookName: req.body.bookName,
-    bookISBN :req.body.bookISBN,
-  };
-  booksDB.push(book);
-  res.status(200).send(book);
-};
 
 // update book by id
 const updateBook = (req,res)=>{
@@ -50,20 +54,25 @@ const updateBook = (req,res)=>{
 };
 
 // delete book by id
-const deleteBook = (req,res)=>{
-  let requestedBookId = parseInt(req.params.bookId)
-  let bookByID = booksDB.find((book) => book.bookId === requestedBookId)
-  if(!bookByID) return res.status(404).send('The book with the given id not found');
-  const index = booksDB.indexOf(bookByID);
-  booksDB.splice(index,1);
-  res.status(200).send(bookByID);
-};
+const deleteBook = async (req,res) =>{
+
+  try{
+      const bookId =  req.params.bookId
+      const book = await Book.deleteOne({_id : bookId})
+      res.status(200).send(book)
+  }
+  catch(e){
+      res.status(400).send(e)
+   }
+}
+
+
 
 
 module.exports={
+  createBook,
   getAllBooks,
   getBookByID,
-  addBook,
   updateBook,
   deleteBook
 };
