@@ -51,17 +51,43 @@ const getBookById = async (req, res) =>{
 }
 
 
-// update book by id
-const updateBook = (req,res)=>{
+const updateBook = async (req,res) =>{
+  try{
+      const bookId =  req.params.bookId
+      const book = await Book.findOne({_id : bookId})
 
-  let requestedBookId = parseInt(req.params.bookId)
-  let bookByID = booksDB.find((book) => book.bookId === requestedBookId)
-  if(!bookByID) return res.status(404).send('The book with the given id not found');
-  bookByID.bookName=req.body.bookName;
-  bookByID.bookISBN=req.body.bookISBN;
-  res.status(200).send(bookByID)
+      if(req.body.isbn){
+          book.isbn = req.body.isbn;
+      }
+      if(req.body.bookName){
+          book.bookName = req.body.bookName;
+      }
+      if(req.body.bookType){
+          book.bookType = req.body.bookType;
+      }
+      if(req.body.authorName){
+          book.authorName = req.body.authorName;
+      }
+      if(req.body.yearOfPublication){
+          book.yearOfPublication = req.body.yearOfPublication;
+      }
+      if(req.body.bookAvailability){
+          book.bookAvailability = req.body.bookAvailability;
+      }
+      if(req.body.memberId){
+          book.memberId = req.body.memberId;
+      }
 
-};
+  
+
+      await book.save()
+      res.status(200).send(book)
+  }
+  catch(e){
+      res.status(400).send(e)
+   }
+
+}
 
 // delete book by id
 const deleteBook = async (req,res) =>{
