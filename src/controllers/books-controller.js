@@ -29,13 +29,39 @@ const createBook = async (req, res) =>{
 //get all books
 const getAllBooks = async (req, res) =>{
   try{
+
+    if(req.query.available)
+    {
+
+      if(req.query.available=='true')
+      {
+        const books = await Book.find({bookAvailability:true})
+        res.status(200).send(books)
+  
+      }
+      else if (req.query.available=='false')
+      {
+        const books = await Book.find({bookAvailability:false})
+        res.status(200).send(books)
+      }
+      else
+      {
+        res.status(200).send('Unknown query')
+      }
+    }
+   
+    else
+    {
       const books = await Book.find({})
       res.status(200).send(books)
+    }
+      
   }
   catch(e){
      res.status(400).send(e)
   }
 }
+
 
 //get book give id in param bookId
 const getBookById = async (req, res) =>{
