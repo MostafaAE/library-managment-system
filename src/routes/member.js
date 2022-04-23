@@ -7,6 +7,8 @@ const memberRouter = Router()
 memberRouter.post("/", Member.createMember);
 memberRouter.get("/", Member.getAllMembers);
 memberRouter.get("/:memberId", Member.getMemberById);
+memberRouter.delete("/:memberId", Member.deleteMember);
+memberRouter.put("/:memberId", Member.updateMember);
 
 
 module.exports = {
