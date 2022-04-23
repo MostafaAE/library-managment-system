@@ -38,12 +38,16 @@ const getAllBooks = async (req, res) =>{
 }
 
 //get book give id in param bookId
-const getBookByID =(req,res)=>
-{
-  let requestedBookId = parseInt(req.params.bookId)
-  let bookByID = booksDB.find((book) => book.bookId === requestedBookId)
-  if(!bookByID) return res.status(404).send('The book with the given id not found');
-  res.status(200).send(bookByID);
+const getBookById = async (req, res) =>{
+
+  try{
+      const bookId =  req.params.bookId
+      const book = await Book.findById({_id : bookId})
+      res.status(200).send(book)
+  }
+  catch(e){
+      res.status(400).send(e)
+   }
 }
 
 
@@ -78,7 +82,7 @@ const deleteBook = async (req,res) =>{
 module.exports={
   createBook,
   getAllBooks,
-  getBookByID,
+  getBookById,
   updateBook,
   deleteBook
 };
