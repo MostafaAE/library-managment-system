@@ -36,9 +36,26 @@ const getAllMembers = async (req, res) =>{
 }
 
 
+//get member give id in param memberId
+const getMemberById = async (req, res) =>{
+
+  try{
+      const memberId =  req.params.memberId
+      const member = await Member.findById({_id : memberId})
+      res.status(200).send(member)
+  }
+  catch(e){
+      res.status(400).send(e)
+   }
+}
+
+
+
+
   module.exports = {
 
     createMember,
-    getAllMembers
-    
+    getAllMembers,
+    getMemberById
+
   };
