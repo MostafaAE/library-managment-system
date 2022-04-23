@@ -4,10 +4,6 @@ const memberRouter = Router()
 
 
 // members end points
-memberRouter.get("/", Member.getAllMembers);
-memberRouter.get("/:memberId", Member.getMemberbyId);
-memberRouter.delete("/:memberId", Member.deleteMember);
-memberRouter.post("/", Member.addMember);
 memberRouter.put("/:memberId", Member.updateMember);
 
 
