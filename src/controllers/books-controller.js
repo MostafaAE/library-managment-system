@@ -54,14 +54,19 @@ const updateBook = (req,res)=>{
 };
 
 // delete book by id
-const deleteBook = (req,res)=>{
-  let requestedBookId = parseInt(req.params.bookId)
-  let bookByID = booksDB.find((book) => book.bookId === requestedBookId)
-  if(!bookByID) return res.status(404).send('The book with the given id not found');
-  const index = booksDB.indexOf(bookByID);
-  booksDB.splice(index,1);
-  res.status(200).send(bookByID);
-};
+const deleteBook = async (req,res) =>{
+
+  try{
+      const bookId =  req.params.bookId
+      const book = await Book.deleteOne({_id : bookId})
+      res.status(200).send(book)
+  }
+  catch(e){
+      res.status(400).send(e)
+   }
+}
+
+
 
 
 module.exports={
