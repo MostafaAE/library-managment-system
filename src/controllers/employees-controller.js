@@ -23,13 +23,13 @@ const updateEmployeeName = (req, res) => {
   if (!employee) {
     res.status(404).send({ error: "NOTFOUND" });
   } else {
-    employee.employeeName = req.body.name;
+    employee.employeeName = req.body.employeeName;
     res.send(employee);
   }
 };
 
 //delete employee by id 
-const deleteEmplyee=(req,res)=>{
+const deleteEmployee=(req,res)=>{
   const id =parseInt(req.params.id);
   const employee = employeesDB.find(
     e => e.employeeId === id
@@ -44,7 +44,7 @@ const deleteEmplyee=(req,res)=>{
 }
 
 //delete All employee  
-const deleteAllEmplyee=(req,res)=>{
+const deleteAllEmployees=(req,res)=>{
 
   if(employeesDB.length === 0){
     return res.send('Error not found');
@@ -57,7 +57,7 @@ const deleteAllEmplyee=(req,res)=>{
 }
 
 // get all employees
-const getAllemployees=(req,res)=>{
+const getAllEmployees=(req,res)=>{
   res.send(employeesDB);
 };
   
@@ -72,19 +72,19 @@ const getEmployeeByID =(req,res)=>{
 const addEmployee = (req,res)=>{
 	const employee ={
 	  employeeId: employeesDB.length+1,
-	  employeeName: req.body.name,
-	  employeeSSN :req.body.ssn,
-	  employeeDOB: req.body.dob,
+	  employeeName: req.body.employeeName,
+	  employeeSSN :req.body.employeeSSN,
+	  employeeDOB: req.body.employeeDOB,
 	};
 	employeesDB.push(employee);
 	res.send(employee);
 };
 
 module.exports={
-  getAllemployees,
+  getAllEmployees,
   getEmployeeByID,
   addEmployee,
   updateEmployeeName,
-  deleteEmplyee,
-  deleteAllEmplyee,
+  deleteEmployee,
+  deleteAllEmployees,
 };
