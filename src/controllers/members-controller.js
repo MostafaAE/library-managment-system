@@ -50,14 +50,6 @@ const getMemberById = async (req, res) =>{
 }
 
 
-
-  module.exports = {
-
-    createMember,
-    getAllMembers,
-    getMemberById
-
-  
   //memebr put by id 
   const updateMember = async (req,res) =>{
     try{
@@ -110,5 +102,8 @@ const getMemberById = async (req, res) =>{
 
   module.exports = {
     updateMember,
-    deleteMember
+    deleteMember,
+    createMember,
+    getAllMembers,
+    getMemberById
   };
