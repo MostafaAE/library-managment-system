@@ -6,8 +6,8 @@ const bookRouter = Router()
 // books end points
 bookRouter.post('/',Book.createBook); 
 bookRouter.get('/',Book.getAllBooks);
-bookRouter.get('/:bookId',Book.getBookByID);
-bookRouter.put('/:bookId',Book.updateBook);
+bookRouter.get('/:bookId',Book.getBookById);
+bookRouter.patch('/:bookId',Book.updateBook);
 bookRouter.delete('/:bookId',Book.deleteBook);
 
 

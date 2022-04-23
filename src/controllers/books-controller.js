@@ -26,32 +26,94 @@ const createBook = async (req, res) =>{
   }
 }
 
-//get all books given route to books
-const getAllBooks=(req,res)=>{
-  res.status(200).send(booksDB);
-};
+//get all books
+const getAllBooks = async (req, res) =>{
+  try{
 
-//get book give id in param bookId
-const getBookByID =(req,res)=>
-{
-  let requestedBookId = parseInt(req.params.bookId)
-  let bookByID = booksDB.find((book) => book.bookId === requestedBookId)
-  if(!bookByID) return res.status(404).send('The book with the given id not found');
-  res.status(200).send(bookByID);
+    if(req.query.available)
+    {
+
+      if(req.query.available=='true')
+      {
+        const books = await Book.find({bookAvailability:true})
+        res.status(200).send(books)
+  
+      }
+      else if (req.query.available=='false')
+      {
+        const books = await Book.find({bookAvailability:false})
+        res.status(200).send(books)
+      }
+      else
+      {
+        res.status(200).send('Unknown query')
+      }
+    }
+   
+    else
+    {
+      const books = await Book.find({})
+      res.status(200).send(books)
+    }
+      
+  }
+  catch(e){
+     res.status(400).send(e)
+  }
 }
 
 
-// update book by id
-const updateBook = (req,res)=>{
+//get book give id in param bookId
+const getBookById = async (req, res) =>{
 
-  let requestedBookId = parseInt(req.params.bookId)
-  let bookByID = booksDB.find((book) => book.bookId === requestedBookId)
-  if(!bookByID) return res.status(404).send('The book with the given id not found');
-  bookByID.bookName=req.body.bookName;
-  bookByID.bookISBN=req.body.bookISBN;
-  res.status(200).send(bookByID)
+  try{
+      const bookId =  req.params.bookId
+      const book = await Book.findById({_id : bookId})
+      res.status(200).send(book)
+  }
+  catch(e){
+      res.status(400).send(e)
+   }
+}
 
-};
+
+const updateBook = async (req,res) =>{
+  try{
+      const bookId =  req.params.bookId
+      const book = await Book.findOne({_id : bookId})
+
+      if(req.body.isbn){
+          book.isbn = req.body.isbn;
+      }
+      if(req.body.bookName){
+          book.bookName = req.body.bookName;
+      }
+      if(req.body.bookType){
+          book.bookType = req.body.bookType;
+      }
+      if(req.body.authorName){
+          book.authorName = req.body.authorName;
+      }
+      if(req.body.yearOfPublication){
+          book.yearOfPublication = req.body.yearOfPublication;
+      }
+      if(req.body.bookAvailability){
+          book.bookAvailability = req.body.bookAvailability;
+      }
+      if(req.body.memberId){
+          book.memberId = req.body.memberId;
+      }
+
+  
+
+      await book.save()
+      res.status(200).send(book)
+  }
+  catch(e){
+      res.status(400).send(e)
+   }
+
+}
 
 // delete book by id
 const deleteBook = async (req,res) =>{
@@ -72,7 +134,7 @@ const deleteBook = async (req,res) =>{
 module.exports={
   createBook,
   getAllBooks,
-  getBookByID,
+  getBookById,
   updateBook,
   deleteBook
 };
