@@ -71,8 +71,15 @@ const getEmployeeByID = async (req, res) => {
 }
 
 // add new employee
-const addEmployee = (req, res) => {
-  //TODO
+const addEmployee = async (req, res) => {
+  try {
+    const employee = new Employee(req.body)
+    await employee.save()
+    res.status(200).send(employee)
+  }
+  catch (e) {
+    res.status(400).send(e)
+  }
 };
 
 module.exports = {
