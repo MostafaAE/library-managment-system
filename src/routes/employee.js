@@ -7,10 +7,9 @@ const employeeRouter = Router()
 employeeRouter.patch('/:employeeId', Employee.updateEmployee);
 employeeRouter.delete('/:employeeId', Employee.deleteEmployee);
 
-employeeRouter.get('/', Employee.getAllEmployees);
-employeeRouter.get('/:id', Employee.getEmployeeByID);
 employeeRouter.post('/', Employee.addEmployee);
-
+employeeRouter.get('/', Employee.getAllEmployees);
+employeeRouter.get('/:employeeId', Employee.getEmployeeByID);
 
 
 module.exports = {
