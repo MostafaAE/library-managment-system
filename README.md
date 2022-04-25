@@ -1,6 +1,4 @@
-# Simple API for managing library system
-Simple REST API for library management system
-## Install dependencies by running `npm install`
+# Library Management System REST API with MongoDB
 ___
 
 ## Organization
@@ -9,26 +7,43 @@ ___
 - Members
 - Employees
 
-### Each resource managed by implementing the main HTTP methods
-- GET for getting all elements or searching if query specified
-  or getting specified element if the id specified.
-- POST for adding new element to the collection.
+### Each resource is managed by the main HTTP methods
+- GET for getting all elements or searching if query specified or getting specified element if the id specified.
+- POST for adding a new element to the collection.
 - PUT for updating the whole element with new fields
-- DELETE for removing the specified element or the whole elements if 
-         the whole collection specified.
+- DELETE for removing the specified element or the whole elements if the whole collection is specified.
 
+___
 
 ## Accessing the API
 
-Server is running on http://localhost:8080
+The server is running on https://library-ms-sfe.herokuapp.com/
 
 ### Books
-`http://localhost:8080/books` using the appropriate HTTP method and path
+https://library-ms-sfe.herokuapp.com/books using the appropriate HTTP method and path
 
 
 ### Employees
-`http://localhost:8080/employees` using the appropriate HTTP method and path
+https://library-ms-sfe.herokuapp.com/employees using the appropriate HTTP method and path
 
 
 ### Members
-`http://localhost:8080/members` using the appropriate HTTP method and path
+https://library-ms-sfe.herokuapp.com/members using the appropriate HTTP method and path
+
+___
+
+# Installation
+
+- Clone the repository: `https://github.com/MostafaAE/library-managment-system.git`
+- Pull Docker Image: `docker pull mostafaae/library-management-system`
+- Run Docker Image: `docker run -p 3000:3000 mostafaae/library-management-system`
+
+___
+
+# Team members
+> * Mostafa Ayman : [@MostafaAE ]( https://github.com/MostafaAE)
+> * Mostafa Saad  : [@MostafaSaad7 ]( https://github.com/MostafaSaad7)
+> * Mariam Gad : [@MariamGad  ]( https://github.com/Mariamgad)
+> * Mostafa Amin : [@MostafaAmin0 ]( https://github.com/MostafaAmin0 )
+> * Mayar Hanafy : [@MayarHanafy ]( https://github.com/MayarHanafy)
+> * Maha Elkomey : [@MahaElomey ]( https://github.com/MahaElomey )

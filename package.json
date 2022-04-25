@@ -1,7 +1,7 @@
 {
-  "name": "test_express_api",
+  "name": "library-managment-system",
   "version": "1.0.0",
-  "description": "This is a simple express api required as an assigment for Test lab",
+  "description": "Library Management System REST API with MongoDB ",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MostafaAE/test_express_api.git"
+    "url": "git+https://github.com/MostafaAE/library-managment-system.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MostafaAE/test_express_api/issues"
+    "url": "https://github.com/MostafaAE/library-managment-system/issues"
   },
-  "homepage": "https://github.com/MostafaAE/test_express_api#readme",
+  "homepage": "https://github.com/MostafaAE/library-managment-system#readme",
   "dependencies": {
     "express": "^4.17.3",
     "mongoose": "^6.3.1"
