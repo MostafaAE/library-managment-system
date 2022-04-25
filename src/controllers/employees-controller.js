@@ -1,3 +1,5 @@
+const { Employee } = require('../models/Employee');
+
 let employeesDB = [
   {
     employeeId: 1,
@@ -15,76 +17,50 @@ let employeesDB = [
 
 
 // update employee name by id 
-const updateEmployeeName = (req, res) => {
-  const id = parseInt(req.params.id);
-  const employee = employeesDB.find(
-    e => e.employeeId === id
-  );
-  if (!employee) {
-    res.status(404).send({ error: "NOTFOUND" });
-  } else {
-    employee.employeeName = req.body.employeeName;
-    res.send(employee);
+const updateEmployee =  (req, res) => {
+  
+};
+
+// delete employee by id
+const deleteEmployee = async (req, res) => {
+  try {
+    const employeeId = req.params.employeeId;
+    const employee = await Employee.deleteOne({_id : employeeId});
+    res.status(200).send(employee);
+
+  } catch (e) {
+    res.status(400).send(e);
   }
 };
 
-//delete employee by id 
-const deleteEmployee=(req,res)=>{
-  const id =parseInt(req.params.id);
-  const employee = employeesDB.find(
-    e => e.employeeId === id
-  );
-  if(!employee){
-    return res.send('Error not found');
-  }
-  const index =employeesDB.indexOf(employee);
-  employeesDB.splice(index,1);
+// get all employees
+const getAllEmployees = (req, res) => {
+  res.send(employeesDB);
+};
 
+// get employee by id 
+const getEmployeeByID = (req, res) => {
+  let employee = employeesDB.find((employee) => employee.employeeId === parseInt(req.params.id));
+  if (!employee) return res.status(404).send('Employee id is not found');
   res.send(employee);
 }
 
-//delete All employee  
-const deleteAllEmployees=(req,res)=>{
-
-  if(employeesDB.length === 0){
-    return res.send('Error not found');
-  }
-
-  const temp =employeesDB;
-  employeesDB =[];
-
-  res.send(temp);
-}
-
-// get all employees
-const getAllEmployees=(req,res)=>{
-  res.send(employeesDB);
-};
-  
-// get employee by id 
-const getEmployeeByID =(req,res)=>{
-	  let employee =employeesDB.find((employee)=>employee.employeeId===parseInt(req.params.id));
-	  if(!employee) return res.status(404).send('Employee id is not found');
-	  res.send(employee);
-}
-
 // add new employee
-const addEmployee = (req,res)=>{
-	const employee ={
-	  employeeId: employeesDB.length+1,
-	  employeeName: req.body.employeeName,
-	  employeeSSN :req.body.employeeSSN,
-	  employeeDOB: req.body.employeeDOB,
-	};
-	employeesDB.push(employee);
-	res.send(employee);
+const addEmployee = (req, res) => {
+  const employee = {
+    employeeId: employeesDB.length + 1,
+    employeeName: req.body.employeeName,
+    employeeSSN: req.body.employeeSSN,
+    employeeDOB: req.body.employeeDOB,
+  };
+  employeesDB.push(employee);
+  res.send(employee);
 };
 
-module.exports={
+module.exports = {
   getAllEmployees,
   getEmployeeByID,
   addEmployee,
-  updateEmployeeName,
+  updateEmployee,
   deleteEmployee,
-  deleteAllEmployees,
 };
