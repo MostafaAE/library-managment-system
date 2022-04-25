@@ -17,8 +17,37 @@ let employeesDB = [
 
 
 // update employee name by id 
-const updateEmployee =  (req, res) => {
-  
+const updateEmployee = async (req, res) => {
+  try {
+
+    const employeeId = req.params.employeeId;
+    const employee = await Employee.findOne({_id: employeeId });
+
+    if (req.body.employeeName) {
+      employee.employeeName = req.body.employeeName;
+    }
+
+    if (req.body.employeeStreet) {
+      employee.employeeStreet = req.body.employeeStreet;
+    }
+
+    if (req.body.employeeCity) {
+      employee.employeeCity = req.body.employeeCity;
+    }
+
+    if (req.body.employeeSalary) {
+      employee.employeeSalary = req.body.employeeSalary;
+    }
+    if (req.body.employeeGender) {
+      employee.employeeGender = req.body.employeeGender;
+    }
+
+    await employee.save();
+    res.status(200).send(employee);
+
+  } catch (e) {
+    res.status(400).send(e);
+  }
 };
 
 // delete employee by id
